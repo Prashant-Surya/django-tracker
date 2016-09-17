@@ -28,4 +28,4 @@ class RequestLogger(object):
             'data': {}
         }
         queue = Queue('', 'visit')
-        queue.push_message('queue message')
+        queue.push_message(kwargs)

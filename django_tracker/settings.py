@@ -77,12 +77,12 @@ WSGI_APPLICATION = 'django_tracker.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.',
-        'NAME': ''
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'track.sqlite3'
     }
 }
 
-from mongoengine import connect
+from mongoengine import register_connection
 _MONGODB_USER = 'tracker'
 _MONGODB_PASSWD = 'tracker'
 _MONGODB_HOST = 'localhost'
@@ -91,7 +91,8 @@ _MONGODB_PORT = 27017
 _MONGODB_DATABASE_HOST = \
     'mongodb://%s:%s@%s/%s' \
     % (_MONGODB_USER, _MONGODB_PASSWD, _MONGODB_HOST, _MONGODB_NAME)
-connect(_MONGODB_NAME, host=_MONGODB_DATABASE_HOST, port=_MONGODB_PORT)
+#register_connection(_MONGODB_NAME, host=_MONGODB_DATABASE_HOST, port=_MONGODB_PORT)
+register_connection(_MONGODB_NAME, _MONGODB_NAME, host=_MONGODB_HOST, port=_MONGODB_PORT)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators

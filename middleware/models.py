@@ -11,3 +11,5 @@ class VisitLog(Document):
     data = DictField()
     timestamp = DateTimeField()
     track_type = StringField(max_length=10)
+
+    meta = {'db_alias': 'tracker'}
