@@ -1,7 +1,7 @@
 import json
 import pika
 
-from middleware.models import VisitLog
+from .models import VisitLog
 
 class Queue(object):
     def __init__(self, exchange, queue):
