@@ -1,3 +1,4 @@
+import json
 import pika
 
 from middleware.models import VisitLog
@@ -19,8 +20,9 @@ class Queue(object):
                 body=message)
 
     def consume_message(self, ch, method, _props, body):
-        log = VisitLog(username='write data')
-        log.save()
+        kwargs = json.loads(body)
+        VisitLog.objects.create(**kwargs)
+        print "{ visit_queue }",kwargs
         ch.basic_ack(delivery_tag=method.delivery_tag)
 
     def start_consuming(self):

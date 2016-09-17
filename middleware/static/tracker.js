@@ -3,7 +3,7 @@ function Tracker(){
 }
 Tracker.prototype.click_links = function(selector, data){
     $('body').on('click', selector, function(e){
-        //e.preventDefault();
+        e.preventDefault();
         data.url = window.location;
         var href = $(this).attr("href");
         $.ajax({

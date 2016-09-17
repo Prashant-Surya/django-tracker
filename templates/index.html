@@ -1,1 +1,15 @@
-Hello world
+{% load static %}
+
+<div class='test' style='background-color: red; width:100%;'>
+fldkfkalsdfjsdkfaksdfasjkfjsadjf
+</div>
+
+<script src="static/tracker.js"></script>
+
+<script type="text/javascript">
+    var tracker = new Tracker();
+    tracker.click_elements('.test', data={
+        "username": 'user',
+        "identifier": "Test"
+    })
+</script>

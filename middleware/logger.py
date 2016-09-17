@@ -1,4 +1,5 @@
 import datetime
+import json
 
 from middleware.queue import Queue
 
@@ -22,10 +23,10 @@ class RequestLogger(object):
             username = request.user.username
         kwargs = {
             'username': username,
-            'timestamp': datetime.datetime.now(),
+            'timestamp': str(datetime.datetime.now()),
             'url': request.get_full_path(),
             'track_type': 'Visit',
             'data': {}
         }
         queue = Queue('', 'visit')
-        queue.push_message(kwargs)
+        queue.push_message(json.dumps(kwargs))
