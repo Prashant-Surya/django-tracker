@@ -1,5 +1,6 @@
 import datetime
 
+from middleware.queue import Queue
 
 class RequestLogger(object):
     def __init__(self, get_response):
@@ -13,8 +14,18 @@ class RequestLogger(object):
 
         # Code to be executed for each request/response after
         # the view is called.
-
         return response
 
-    def process_view(self, request, view_func, view_args, view_kwargs):
-        
+    def process_view(self, request, _view, *args, **kwargs):
+        username = "Anonymous"
+        if request.user.username:
+            username = request.user.username
+        kwargs = {
+            'username': username,
+            'timestamp': datetime.datetime.now(),
+            'url': request.get_full_path(),
+            'track_type': 'Visit',
+            'data': {}
+        }
+        queue = Queue('', 'visit')
+        queue.push_message('queue message')

@@ -1,11 +1,13 @@
 from __future__ import unicode_literals
 
-from mongoengine import Document, StringField, DictField
+from mongoengine import Document, StringField, DictField, DateTimeField
 
 #from django.db import models
 
 # Create your models here.
-class RequestLog(Document):
-    user_name = StringField(max_length=200)
+class VisitLog(Document):
+    username = StringField(max_length=200)
     url = StringField()
     data = DictField()
+    timestamp = DateTimeField()
+    track_type = StringField(max_length=10)

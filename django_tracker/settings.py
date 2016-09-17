@@ -12,12 +12,6 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
-from mongoengine import connect
-MONGODB_HOST = 'localhost'
-MONGODB_PORT = '27017'
-connect('tracker', host=MONGODB_HOST, port=MONGODB_PORT)
-
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -43,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'middleware'
 ]
 
 MIDDLEWARE = [
@@ -82,9 +77,21 @@ WSGI_APPLICATION = 'django_tracker.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.dummy'
+        'ENGINE': 'django.db.backends.',
+        'NAME': ''
     }
 }
+
+from mongoengine import connect
+_MONGODB_USER = 'tracker'
+_MONGODB_PASSWD = 'tracker'
+_MONGODB_HOST = 'localhost'
+_MONGODB_NAME = 'tracker'
+_MONGODB_PORT = 27017
+_MONGODB_DATABASE_HOST = \
+    'mongodb://%s:%s@%s/%s' \
+    % (_MONGODB_USER, _MONGODB_PASSWD, _MONGODB_HOST, _MONGODB_NAME)
+connect(_MONGODB_NAME, host=_MONGODB_DATABASE_HOST, port=_MONGODB_PORT)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
