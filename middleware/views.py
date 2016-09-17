@@ -3,7 +3,6 @@ from pymongo import MongoClient
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-
 client = MongoClient()
 db = client.tracker
 
@@ -30,17 +29,15 @@ def fetch_visits(request):
         ]
     )
 
-    graph_data = []
-    count = 1
+    chart_data = [['URL', 'Visits']]
+
     for document in data:
-        #print(document)
-        graph_data.append({
-            'x': count,
-            'y': str(document['count'])
-        })
-        count += 1
+        chart_data.append([
+            str(document['_id']), int(document['count'])
+        ])
+
     ctx = {
-        'graph_data': graph_data
+        'chart_data': chart_data
     }
 
     ctx = RequestContext(request, ctx)
