@@ -43,3 +43,40 @@ def fetch_visits(request):
     ctx = RequestContext(request, ctx)
 
     return render_to_response(template, ctx)
+
+
+def fetch_clicks(request):
+    template = 'clicks.html'
+    data = db.visit_log.aggregate(
+        [
+            {
+                "$match":
+                {
+                     "track_type": "Click"
+                }
+            },
+            {
+                "$group": {
+                    "_id": "$identifier",
+                    "count": {
+                        "$sum": 1
+                    }
+                }
+            }
+        ]
+    )
+
+    chart_data = [['Identifier', 'Clicks']]
+
+    for document in data:
+        chart_data.append([
+            str(document['_id']), int(document['count'])
+        ])
+
+    ctx = {
+        'chart_data': chart_data
+    }
+
+    ctx = RequestContext(request, ctx)
+
+    return render_to_response(template, ctx)

@@ -1,0 +1,17 @@
+{% load static %}
+
+<div class='test' style='background-color: red; width:100%;'>
+fldkfkalsdfjsdkfaksdfasjkfjsadjf
+</div>
+
+<script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+
+<script src="/static/tracker.js"></script>
+
+<script type="text/javascript">
+    var tracker = new Tracker();
+    tracker.click_elements('.test', data={
+        "username": 'user',
+        "identifier": "Test"
+    })
+</script>

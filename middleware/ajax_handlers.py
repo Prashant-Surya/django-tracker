@@ -12,9 +12,8 @@ def track_click(request):
         'timestamp': str(datetime.datetime.now()),
         'url': data.get('location'),
         'track_type': 'Click',
-        'data': {
-            'identifier': data.get("identifier")
-        }
+        'identifier': data.get('identifier'),
+        'data': {}
     }
     queue = Queue('', 'visit')
     queue.push_message(json.dumps(kwargs))
@@ -26,10 +25,9 @@ def track_link(request):
         'username': data.get('username'),
         'timestamp': str(datetime.datetime.now()),
         'url': data.get('location'),
-        'track_type': 'Link',
-        'data': {
-            'identifier': data.get('identifier')
-        }
+        'track_type': 'Click',
+        'identifier': data.get('identifier'),
+        'data': {}
     }
     queue = Queue('', 'visit')
     queue.push_message(json.dumps(kwargs))
