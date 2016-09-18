@@ -21,5 +21,5 @@ from .views import test_view
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'test/', test_view, name='test'),
-    url('', include('middleware.urls')),
+    url('', include('tracker.urls')),
 ]

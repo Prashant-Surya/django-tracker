@@ -1,7 +1,7 @@
 import datetime
 import json
 
-from middleware.queue import Queue
+from tracker.queue import Queue
 
 class RequestLogger(object):
     def __init__(self, get_response):

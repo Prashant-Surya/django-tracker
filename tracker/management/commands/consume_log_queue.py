@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from middleware.queue import Queue
+from tracker.queue import Queue
 
 class Command(BaseCommand):
     """
